@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { ReminderItem } from '../App';
 import RemindersList from './RemindersList';
+import SubscriptionsList, { Subscription } from './SubscriptionsList';
 
 function TabContainer({ children, dir }: { children: React.ReactNode, dir: string }) {
   return (
@@ -37,6 +38,7 @@ export interface RemindersTabsProps extends StyledComponentProps<keyof ReturnTyp
     pending: ReminderItem[];
     send: ReminderItem[];
   };
+  subscriptions: Subscription[];
 
   theme: Theme;
 }
@@ -59,7 +61,7 @@ class RemindersTabs extends Component<RemindersTabsProps, State> {
   };
 
   render() {
-    const { classes, theme, reminders } = this.props;
+    const { classes, theme, reminders, subscriptions } = this.props;
 
     if (!classes) {
       throw new Error(`error loading styles`);
@@ -77,6 +79,7 @@ class RemindersTabs extends Component<RemindersTabsProps, State> {
           >
             <Tab label="Future" />
             <Tab label="Past" />
+            <Tab label="Subscriptions" />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -89,6 +92,9 @@ class RemindersTabs extends Component<RemindersTabsProps, State> {
           </TabContainer>
           <TabContainer dir={theme.direction}>
             <RemindersList list={reminders.send} />
+          </TabContainer>
+          <TabContainer dir={theme.direction}>
+            <SubscriptionsList list={subscriptions} />
           </TabContainer>
         </SwipeableViews>
       </div>

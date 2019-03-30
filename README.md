@@ -70,3 +70,38 @@ Example app for purpose of warsawjs workshop #31
   ]
 }
 ```
+
+#### `PUT:api/subscriptions`
+###### `body`
+
+```
+{
+  id: string
+  device: string
+  browser: string
+}
+
+```
+###### `response:status`
+
+```
+201 || resource create
+```
+
+#### `POST:api/subscriptions`
+###### `body`
+
+```
+{
+  id: string
+}
+
+```
+###### `response`
+
+```
+{
+  status: string
+}
+
+```

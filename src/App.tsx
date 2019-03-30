@@ -8,6 +8,7 @@ import RemindButton from './components/RemindButton';
 import RemindersTabs from './components/RemindersTabs';
 import moment from 'moment-timezone/moment-timezone';
 import { withSnackbar } from 'notistack';
+import { Subscription } from './components/SubscriptionsList';
 
 const styles = (theme: Theme) => ({
   root: {
@@ -49,6 +50,7 @@ interface State {
     pending: ReminderItem[];
     send: ReminderItem[];
   };
+  subscriptions?: Subscription[];
   time: Moment;
   body: string;
 }
