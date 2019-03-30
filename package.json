@@ -1,7 +1,7 @@
 {
   "name": "reminder",
   "version": "0.1.0",
-  "homepage": "https://g3f4.github.io/warsaw-workshop-31",
+  "homepage": "https://g3f4.github.io/warsawjs-workshop-31",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
