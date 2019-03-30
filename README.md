@@ -79,6 +79,7 @@ Example app for purpose of warsawjs workshop #31
   id: string
   device: string
   browser: string
+  subscriptionData: PushSubscription
 }
 
 ```
