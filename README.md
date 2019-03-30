@@ -7,7 +7,8 @@ Example app for purpose of warsawjs workshop #31
 ## `API`
 
 #### `GET:api/reminders?status={status}`
-##### `response`
+##### Fetches reminders list by status
+###### `response`
 
 ```
 {
@@ -22,7 +23,9 @@ Example app for purpose of warsawjs workshop #31
 }
 ```
 
+
 #### `POST:api/reminders`
+##### Creates reminder
 ###### `body`
 
 ```
@@ -41,6 +44,7 @@ Example app for purpose of warsawjs workshop #31
 
 
 #### `DELETE:api/reminders`
+##### Deletes reminder
 ###### `body`
 
 ```
@@ -56,8 +60,10 @@ Example app for purpose of warsawjs workshop #31
 200 || OK
 ```
 
+
 #### `GET:api/subscriptions`
-##### `response`
+##### Fetches subscriptions list
+###### `response`
 
 ```
 {
@@ -71,15 +77,14 @@ Example app for purpose of warsawjs workshop #31
 }
 ```
 
+
 #### `PUT:api/subscriptions`
+##### Add subscription
 ###### `body`
 
 ```
 {
-  id: string
-  device: string
-  browser: string
-  subscriptionData: PushSubscription
+  data: PushSubscription
 }
 
 ```
@@ -89,7 +94,9 @@ Example app for purpose of warsawjs workshop #31
 201 || resource create
 ```
 
+
 #### `POST:api/subscriptions`
+##### Tests subscription
 ###### `body`
 
 ```
