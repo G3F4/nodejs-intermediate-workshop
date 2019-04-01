@@ -1,0 +1,22 @@
+{
+  "name": "warsawjs-workshop-31-calendar-server",
+  "version": "1.0.0",
+  "description": "Express server serving client app and api",
+  "main": "index.js",
+  "author": "G3F4",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chance": "1.0.18",
+    "express": "4.16.4",
+    "moment-timezone": "^0.5.23"
+  },
+  "scripts": {
+    "dev": "MOCKS=true nodemon index.js",
+    "start": "MOCKS=true node index.js"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.10"
+  }
+}

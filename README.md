@@ -6,32 +6,53 @@ Example app for purpose of warsawjs workshop #31
 
 ## `API`
 
-#### `GET:api/reminders?status={status}`
-##### Fetches reminders list by status
+#### `GET:api/calendar?month={YYYY-MM}`
+##### Fetches calendar month
 ###### `response`
 
 ```
 {
-  list: [
+  data: [
+    date: string(format=YYYY-MM-DD),
+    events: [
+      {
+        id: string(format=guid)
+        title: string
+        description: string
+        time: string(format=YYYY-MM-DDThh:mm)
+      }
+    ]
+  ]
+}
+```
+
+#### `GET:api/day?date={YYYY-MM-DD}`
+##### Fetches calendar day
+###### `response`
+
+```
+{
+  data: [
     {
-      id: string
-      status: 'FUTURE' | 'PAST'
-      body: string
-      time: Date
+      id: string(format=guid)
+      title: string
+      description: string
+      time: string(format=YYYY-MM-DDThh:mm)
     }
   ]
 }
 ```
 
 
-#### `POST:api/reminders`
-##### Creates reminder
+#### `POST:api/event`
+##### Creates event
 ###### `body`
 
 ```
 {
-  body: string
-  time: Date
+  title: string
+  description: string
+  time: string(format=YYYY-MM-DDThh:mm)
 }
 
 ```
@@ -43,7 +64,27 @@ Example app for purpose of warsawjs workshop #31
 ```
 
 
-#### `DELETE:api/reminders`
+#### `PUT:api/event?id={guid}`
+##### Updates event
+###### `body`
+
+```
+{
+  title: string
+  description: string
+  time: string(format=YYYY-MM-DDThh:mm)
+}
+
+```
+
+###### `response:status`
+
+```
+200 || ok
+```
+
+
+#### `DELETE:api/event?id={guid}`
 ##### Deletes reminder
 ###### `body`
 
@@ -57,7 +98,7 @@ Example app for purpose of warsawjs workshop #31
 ###### `response:status`
 
 ```
-200 || OK
+204 || no content
 ```
 
 
@@ -78,7 +119,7 @@ Example app for purpose of warsawjs workshop #31
 ```
 
 
-#### `PUT:api/subscriptions`
+#### `POST:api/subscriptions`
 ##### Add subscription
 ###### `body`
 
@@ -95,7 +136,7 @@ Example app for purpose of warsawjs workshop #31
 ```
 
 
-#### `POST:api/subscriptions`
+#### `PUT:api/subscriptions`
 ##### Tests subscription
 ###### `body`
 
