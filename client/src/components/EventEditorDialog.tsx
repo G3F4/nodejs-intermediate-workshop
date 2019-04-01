@@ -1,14 +1,16 @@
 import { StyledComponentProps, Theme, withStyles } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
+import { Add, Edit } from '@material-ui/icons';
 import React, { ChangeEvent, Component } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
-import { CalendarEvent } from './day/Day';
+import { CalendarEvent } from './day/DayDataProvider';
 import moment, { Moment } from 'moment-timezone/moment-timezone';
 
 const styles = (theme: Theme) => ({
@@ -28,6 +30,7 @@ export interface EventEditorDialogProps extends StyledComponentProps<keyof Retur
   fullScreen?: boolean;
   event?: CalendarEvent;
   selectedDay?: Moment;
+  fabButtonClassName?: string;
 }
 
 interface State {
@@ -97,7 +100,7 @@ class EventEditorDialog extends Component<EventEditorDialogProps, State> {
         body: JSON.stringify(this.state.event),
       });
 
-      if (status === 201) {
+      if (status === 200) {
         this.handleClose();
       }
     } else {
@@ -118,7 +121,7 @@ class EventEditorDialog extends Component<EventEditorDialogProps, State> {
   };
 
   render() {
-    const { classes, fullScreen, event } = this.props;
+    const { classes, fullScreen, event, fabButtonClassName } = this.props;
     const { open, event: { description, time, title, notification } } = this.state;
 
     if (!classes) {
@@ -127,9 +130,9 @@ class EventEditorDialog extends Component<EventEditorDialogProps, State> {
 
     return (
       <div className={classes.root}>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          {event ? 'Modify' : 'Add new event'}
-        </Button>
+        <Fab color="secondary" aria-label="Open editor" onClick={this.handleClickOpen} className={fabButtonClassName}>
+          {event ? <Edit /> : <Add />}
+        </Fab>
         <Dialog
           fullScreen={fullScreen}
           open={open}

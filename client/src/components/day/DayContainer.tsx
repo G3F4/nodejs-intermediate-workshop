@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 // @ts-ignore
 import { StyledComponentProps, Theme, withStyles } from '@material-ui/core/styles';
 import { Moment } from 'moment-timezone/moment-timezone';
-import Day from './Day';
+import DayDataProvider from './DayDataProvider';
 
 const styles = (_theme: Theme) => ({
   root: {
@@ -24,7 +24,7 @@ function DayContainer(props: CalendarContainerProps) {
   return (
     <div className={classes.root}>
       <Suspense fallback="Loading...">
-        <Day selectedDay={selectedDay} />
+        <DayDataProvider selectedDay={selectedDay} />
       </Suspense>
     </div>
   );

@@ -2,7 +2,6 @@ import { Card } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 // @ts-ignore
-import useFetch from 'fetch-suspense';
 import { StyledComponentProps, Theme, withStyles } from '@material-ui/core/styles';
 import { Moment } from 'moment-timezone/moment-timezone';
 import Typography from '@material-ui/core/Typography';
@@ -39,6 +38,7 @@ export interface Day {
 }
 
 export interface CalendarProps extends StyledComponentProps<keyof ReturnType<typeof styles>> {
+  list: Day[];
   selectedDay: Moment;
 
   onChange(date: string): void;
@@ -47,8 +47,7 @@ export interface CalendarProps extends StyledComponentProps<keyof ReturnType<typ
 const isDaySelected = (selectedDay: Moment, date: string) => selectedDay.isSame(moment(date), 'day');
 
 function Calendar(props: CalendarProps) {
-  const { classes, selectedDay, onChange } = props;
-  const { data }: { data: Day[]; } = useFetch(`/calendar?month=${selectedDay.format('YYYY-MM')}`, { method: 'GET' });
+  const { classes, selectedDay, list, onChange } = props;
 
   if (!classes) {
     throw new Error(`error loading styles`);
@@ -63,7 +62,7 @@ function Calendar(props: CalendarProps) {
           </Typography>
         </Card>
       ))}
-      {data.map(({ date, events }) => (
+      {list.map(({ date, events }) => (
         <Card
           key={date}
           className={classnames({

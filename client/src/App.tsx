@@ -1,18 +1,16 @@
 import { StyledComponentProps, Theme, withStyles } from '@material-ui/core';
-import AppBar from '@material-ui/core/AppBar';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 import { Moment } from 'moment-timezone/moment-timezone';
 import React, { Component } from 'react';
 import CalendarContainer from './components/calendar/CalendarContainer';
+import CalendarBar from './components/CalendarBar';
 import DayContainer from './components/day/DayContainer';
 import moment from 'moment-timezone/moment-timezone';
 import { withSnackbar } from 'notistack';
-import EventEditorDialog from './components/EventEditorDialog';
 
 const styles = (theme: Theme) => ({
   root: {
+    position: 'relative',
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'column',
@@ -21,6 +19,22 @@ const styles = (theme: Theme) => ({
   },
   header: {
 
+  },
+  appBar: {
+    top: 'auto',
+    bottom: 0,
+  },
+  toolbar: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  fabButton: {
+    position: 'absolute',
+    zIndex: 1,
+    top: -30,
+    left: 0,
+    right: 0,
+    margin: '0 auto',
   },
   content: {
     marginLeft: theme.spacing.unit,
@@ -50,6 +64,18 @@ class App extends Component<AppProps, State> {
     this.setState({ selectedDay: moment(date) })
   };
 
+  handlePrevMonth = () => {
+    this.setState({
+      selectedDay: this.state.selectedDay.subtract(1, 'month'),
+    });
+  };
+
+  handleNextMonth = () => {
+    this.setState({
+      selectedDay: this.state.selectedDay.add(1, 'month'),
+    });
+  };
+
   render() {
     const { classes } = this.props;
     const { selectedDay } = this.state;
@@ -64,33 +90,8 @@ class App extends Component<AppProps, State> {
           <Typography variant="h2" gutterBottom className={classes.header}>
             {moment(selectedDay).format('MMMM')}
           </Typography>
-          <AppBar position="static" color="default">
-            <Tabs
-              value={null}
-              indicatorColor="primary"
-              textColor="primary"
-              variant="fullWidth"
-            >
-              <Tab
-                label={moment(selectedDay).subtract(1, 'month').format('MMMM')}
-                onClick={() => {
-                  this.setState({
-                    selectedDay: selectedDay.subtract(1, 'month'),
-                  })
-                }}
-              />
-              <Tab
-                label={moment(selectedDay).add(1, 'month').format('MMMM')}
-                onClick={() => {
-                  this.setState({
-                    selectedDay: selectedDay.add(1, 'month'),
-                  })
-                }}
-              />
-            </Tabs>
-          </AppBar>
           <CalendarContainer selectedDay={selectedDay} onChange={this.handleChangeSelectedDay} />
-          <EventEditorDialog selectedDay={selectedDay} />
+          <CalendarBar selectedDay={selectedDay} onNext={this.handleNextMonth} onPrev={this.handlePrevMonth} />
           <DayContainer selectedDay={selectedDay} />
         </div>
       </div>
