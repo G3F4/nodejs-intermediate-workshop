@@ -4,6 +4,8 @@ const morgan = require('morgan');
 const mocksApi = require('./mocks/api.js');
 const dbApi = require('./db/api.js');
 
+const PORT = process.env.PORT || 5000;
+
 const api = process.env.MOCKS ? mocksApi : dbApi;
 const app = express();
 
@@ -43,7 +45,7 @@ app.post('/notifications', function (req, res) {
   res.send();
 });
 
-app.set('port', 5000);
+app.set('port', PORT);
 
 app.listen(app.get('port'), () => {
   console.info( `express app running on port: ${app.get('port')}`);

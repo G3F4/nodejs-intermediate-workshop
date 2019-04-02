@@ -16,7 +16,7 @@
   "scripts": {
     "client:build": "rm -rf public && tar -zxvf client-package.tar.gz && mv build public",
     "dev": "MOCKS=true nodemon index.js",
-    "start": "yarn run client:build && MOCKS=true node index.js"
+    "start": "MOCKS=true node index.js"
   },
   "devDependencies": {
     "nodemon": "1.18.10"
