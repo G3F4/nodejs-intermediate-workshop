@@ -102,30 +102,20 @@ Example app for purpose of warsawjs workshop #31
 ```
 
 
-#### `GET:api/subscriptions`
-##### Fetches subscriptions list
-###### `response`
-
-```
-{
-  list: [
-    {
-      id: string
-      device: string
-      browser: string
-    }
-  ]
-}
-```
-
-
 #### `POST:api/subscriptions`
-##### Add subscription
+##### Register user subscription
 ###### `body`
 
 ```
 {
-  data: PushSubscription
+  data: {
+    endpoint: URL
+    expirationTime: Date
+    keys: { 
+      p256dh: string
+      auth: string
+    }
+  }
 }
 
 ```
@@ -136,21 +126,3 @@ Example app for purpose of warsawjs workshop #31
 ```
 
 
-#### `PUT:api/subscriptions`
-##### Tests subscription
-###### `body`
-
-```
-{
-  id: string
-}
-
-```
-###### `response`
-
-```
-{
-  status: string
-}
-
-```
