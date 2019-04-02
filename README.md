@@ -1,6 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Reminder app
+## Calendar server app
 
 Example app for purpose of warsawjs workshop #31
 
