@@ -1,6 +1,6 @@
 ## Calendar server app
 
-Example app for purpose of warsawjs workshop #31
+Example app for purpose of WarsawJS workshop #31
 
 ## `API`
 
