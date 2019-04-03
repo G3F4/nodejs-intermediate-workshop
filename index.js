@@ -2,8 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const mocksApi = require('./mocks/api.js');
-const dbApi = require('./db/api.js');
+const api = require('./db/api.js');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 const mongoose = require('mongoose');
@@ -18,13 +17,6 @@ const SESSION_OPTIONS = {
   saveUninitialized: true,
 };
 
-const userSchema = new mongoose.Schema({
-  id: String
-});
-
-const User = mongoose.model('User', userSchema);
-
-const api = process.env.MOCKS ? mocksApi : dbApi;
 const app = express();
 const db = mongoose.connection;
 
@@ -49,12 +41,7 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.DB === 'remote' ? '9bede45ff253717428e0a02fc6c3f6d11d8a1da0' : 'f0cba3f5c1832e8acb09a55117c18ebdd4d99bd4',
     callbackURL: process.env.DB === 'remote' ? 'https://warsawjs-workshop-31.herokuapp.com/auth/github/callback' : 'http://localhost:5000/auth/github/callback'
   },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOneAndUpdate({ id: profile.id }, { $set: { id: profile.id }}, { upsert: true  }, function (err, user) {
-
-      return cb(err, { id: user.id });
-    });
-  }
+  (accessToken, refreshToken, profile, cb) => api.getOrCreateUser(profile.id, cb),
 ));
 
 app.use(bodyParser.json());
@@ -120,7 +107,7 @@ app.delete('/event', async function (req, res) {
 });
 
 app.post('/notifications', async function (req, res) {
-  // await api.addSubscription(req.user.id, req.body);
+  await api.addSubscription(req.user.id, req.body.data);
 
   res.status(201);
   res.send();

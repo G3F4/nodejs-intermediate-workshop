@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const moment = require('moment-timezone');
 
+const userSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    index: { unique: true, dropDups: true },
+    required: true,
+  },
+});
+
+const User = mongoose.model('User', userSchema);
+
 const eventSchema = new mongoose.Schema({
   userId: String,
   title: String,
@@ -10,6 +20,22 @@ const eventSchema = new mongoose.Schema({
 });
 
 const Event = mongoose.model('Event', eventSchema);
+
+const subscriptionSchema = new mongoose.Schema({
+  userId: String,
+  endpoint: {
+    type: String,
+    index: { unique: true, dropDups: true },
+    required: true,
+  },
+  expirationTime: String,
+  keys: {
+    p256dh: String,
+    auth: String,
+  },
+});
+
+const Subscription = mongoose.model('Subscription', subscriptionSchema);
 
 module.exports.getMonth = async (userId, date) => {
   console.log(['db.api.getMonth'], userId, date);
@@ -46,14 +72,41 @@ module.exports.addEvent = async (userId, data) => {
   const doc = new Event({ userId, ...data });
 
   await doc.save();
+
+  return {
+    id: doc._id,
+    description: doc.description,
+    time: moment(doc.time).format('YYYY-MM-DDThh:mm'),
+    title: doc.title,
+  }
 };
 
 module.exports.updateEvent = async (eventId, data) => {
   console.log(['db.api.updateEvent'], eventId, data);
   await Event.findByIdAndUpdate(eventId, data);
+
+  return eventId;
 };
 
 module.exports.deleteEvent = async (eventId) => {
   console.log(['db.api.deleteEvent'], eventId);
   await Event.findByIdAndRemove(eventId);
+
+  return eventId;
 };
+
+module.exports.addSubscription = async (userId, data) => {
+  console.log(['db.api.addSubscription'], userId, data);
+  const doc = new Subscription({ userId, ...data });
+
+  await doc.save();
+};
+
+module.exports.getOrCreateUser = (userId, cb) => {
+  console.log(['db.api.getOrCreateUser'], userId);
+  User.findOneAndUpdate({ userId }, { $set: { userId }}, { upsert: true  }, function (err, user) {
+
+    return cb(err, { userId: user.userId });
+  });
+};
+
