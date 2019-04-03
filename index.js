@@ -58,7 +58,6 @@ passport.use(new GitHubStrategy({
 ));
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
 app.use(morgan('combined'));
 
 // express Session
@@ -83,7 +82,7 @@ app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.send('Unauthenticated access!');
+    res.redirect('/auth/github');
   }
 });
 
@@ -127,6 +126,7 @@ app.post('/notifications', async function (req, res) {
   res.send();
 });
 
+app.use(express.static('public'));
 app.set('port', PORT);
 
 app.listen(app.get('port'), () => {
