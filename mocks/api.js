@@ -3,7 +3,7 @@ const moment = require('moment-timezone');
 
 const chance = new Chance();
 
-module.exports.getMonth = (month) => {
+module.exports.getMonth = (userId, month) => {
   const startDateMoment = moment(month).startOf('month').startOf('week');
 
   return Array.from({ length: 7 * 6 }).map(() => ({
@@ -17,7 +17,7 @@ module.exports.getMonth = (month) => {
   }));
 };
 
-module.exports.getDayEvents = (day) => {
+module.exports.getDayEvents = (userId, day) => {
   const startDate = moment(day).startOf('day').add(6, 'hour');
 
   return Array.from({ length: chance.integer({ min: 0, max: 10 }) }).map(() => ({

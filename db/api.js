@@ -1,9 +1,59 @@
-module.exports.getMonth = (date) => {
-  console.log(['db.api.getMonth'], date);
-  throw new Error('not implemented yet.');
+const mongoose = require('mongoose');
+const moment = require('moment-timezone');
+
+const eventSchema = new mongoose.Schema({
+  userId: String,
+  title: String,
+  description: String,
+  notification: Boolean,
+  time: Date,
+});
+
+const Event = mongoose.model('Event', eventSchema);
+
+module.exports.getMonth = async (userId, date) => {
+  console.log(['db.api.getMonth'], userId, date);
+  const result = await Event.find({ userId });
+
+  const startDateMoment = moment(date).startOf('month').startOf('week');
+
+  return Array.from({ length: 7 * 6 }).map(() => {
+    const date = startDateMoment.add(1, 'day').format('YYYY-MM-DD');
+
+    return {
+      date,
+      events: (result.filter(doc => date === moment(doc.time).format('YYYY-MM-DD')) || [])
+        .map(({ time, description, title, _id }) => ({ time, description, title, id: _id })),
+    };
+  });
 };
 
-module.exports.getDay = (date) => {
-  console.log(['db.api.getDayEvents'], date);
-  throw new Error('not implemented yet.');
+module.exports.getDayEvents = async (userId, date) => {
+  console.log(['db.api.getDayEvents'], userId, date);
+  const result = await Event.find({ userId });
+
+  return (result.filter(doc => moment(date).format('YYYY-MM-DD') === moment(doc.time).format('YYYY-MM-DD')) || [])
+    .map(doc => ({
+      id: doc._id,
+      description: doc.description,
+      time: moment(doc.time).format('YYYY-MM-DDThh:mm'),
+      title: doc.title,
+    }));
+};
+
+module.exports.addEvent = async (userId, data) => {
+  console.log(['db.api.addEvent'], userId, data);
+  const doc = new Event({ userId, ...data });
+
+  await doc.save();
+};
+
+module.exports.updateEvent = async (eventId, data) => {
+  console.log(['db.api.updateEvent'], eventId, data);
+  await Event.findByIdAndUpdate(eventId, data);
+};
+
+module.exports.deleteEvent = async (eventId) => {
+  console.log(['db.api.deleteEvent'], eventId);
+  await Event.findByIdAndRemove(eventId);
 };
