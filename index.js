@@ -74,19 +74,19 @@ app.use((req, res, next) => {
 });
 
 app.get('/calendar', async function (req, res) {
-  const data = await api.getMonth(req.user.id, req.query.month);
+  const data = await api.getMonth(req.user.userId, req.query.month);
 
   res.json({ data });
 });
 
 app.get('/day', async function (req, res) {
-  const data = await api.getDayEvents(req.user.id, req.query.date);
+  const data = await api.getDayEvents(req.user.userId, req.query.date);
 
   res.json({ data });
 });
 
 app.post('/event', async function (req, res) {
-  await api.addEvent(req.user.id, req.body);
+  await api.addEvent(req.user.userId, req.body);
 
   res.status(201);
   res.send();
@@ -107,7 +107,7 @@ app.delete('/event', async function (req, res) {
 });
 
 app.post('/notifications', async function (req, res) {
-  await api.addSubscription(req.user.id, req.body.data);
+  await api.addSubscription(req.user.userId, req.body.data);
 
   res.status(201);
   res.send();
