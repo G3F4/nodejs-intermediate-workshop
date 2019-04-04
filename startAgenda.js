@@ -24,10 +24,18 @@ const sendUserNotification = async (userId, title, notification) => {
 
     await Promise.all(subscriptions.map(async subscription => {
       try {
-        await webPush.sendNotification(subscription, payload);
+        await webPush.sendNotification(subscription.data, payload);
       } catch (e) {
         await api.deleteSubscription(subscription._id);
-        throw new Error(`error webPush.sendNotification for subscription: ${JSON.stringify(subscription)}  | ${e}`);
+        throw new Error(`
+          webPush.sendNotification error |
+          name | ${e.name}
+          message | ${e.message}
+          statusCode | ${e.statusCode}
+          headers | ${JSON.stringify(e.headers)}
+          body | ${e.body}
+          endpoint | ${e.endpoint}
+        `);
       }
     }));
   } catch (e) {

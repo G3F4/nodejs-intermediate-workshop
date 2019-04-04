@@ -108,7 +108,7 @@ module.exports.getSubscriptions = async (userId) => {
 
 module.exports.addSubscription = async (userId, data) => {
   console.info(['db.api.addSubscription'], userId, data);
-  const doc = new SubscriptionModel({ userId, ...data });
+  const doc = new SubscriptionModel({ userId, data });
 
   await doc.save();
 
