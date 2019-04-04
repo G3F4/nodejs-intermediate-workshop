@@ -86,24 +86,21 @@ app.get('/day', async function (req, res) {
 });
 
 app.post('/event', async function (req, res) {
-  await api.addEvent(req.user.userId, req.body);
+  const id = await api.addEvent(req.user.userId, req.body);
 
-  res.status(201);
-  res.send();
+  res.send({ id });
 });
 
 app.put('/event', async function (req, res) {
-  await api.updateEvent(req.query.id, req.body);
+  const id = await api.updateEvent(req.query.id, req.body);
 
-  res.status(200);
-  res.send();
+  res.send({ id });
 });
 
 app.delete('/event', async function (req, res) {
-  await api.deleteEvent(req.query.id);
+  const id = await api.deleteEvent(req.query.id);
 
-  res.status(204);
-  res.send();
+  res.send({ id });
 });
 
 app.post('/notifications', async function (req, res) {

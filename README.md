@@ -16,8 +16,6 @@ Example app for purpose of WarsawJS workshop #31
       {
         id: string(format=guid)
         title: string
-        description: string
-        time: string(format=YYYY-MM-DDThh:mm)
       }
     ]
   ]
@@ -36,6 +34,7 @@ Example app for purpose of WarsawJS workshop #31
       title: string
       description: string
       time: string(format=YYYY-MM-DDThh:mm)
+      notification: boolean
     }
   ]
 }
@@ -51,6 +50,7 @@ Example app for purpose of WarsawJS workshop #31
   title: string
   description: string
   time: string(format=YYYY-MM-DDThh:mm)
+  notification: boolean
 }
 
 ```
@@ -58,7 +58,9 @@ Example app for purpose of WarsawJS workshop #31
 ###### `response:status`
 
 ```
-201 || resource create
+{
+  id: string
+}
 ```
 
 
@@ -71,6 +73,7 @@ Example app for purpose of WarsawJS workshop #31
   title: string
   description: string
   time: string(format=YYYY-MM-DDThh:mm)
+  notification: boolean
 }
 
 ```
@@ -78,7 +81,9 @@ Example app for purpose of WarsawJS workshop #31
 ###### `response:status`
 
 ```
-200 || ok
+{
+  id: string
+}
 ```
 
 

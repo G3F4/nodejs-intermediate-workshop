@@ -64,6 +64,7 @@ module.exports.getDayEvents = async (userId, date) => {
       description: doc.description,
       time: moment(doc.time).format('YYYY-MM-DDThh:mm'),
       title: doc.title,
+      notification: doc.notification,
     }));
 };
 
@@ -73,12 +74,7 @@ module.exports.addEvent = async (userId, data) => {
 
   await doc.save();
 
-  return {
-    id: doc._id,
-    description: doc.description,
-    time: moment(doc.time).format('YYYY-MM-DDThh:mm'),
-    title: doc.title,
-  }
+  return doc._id;
 };
 
 module.exports.updateEvent = async (eventId, data) => {
