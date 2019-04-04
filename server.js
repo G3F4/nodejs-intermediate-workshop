@@ -18,9 +18,17 @@ app.use(session(SESSION_OPTIONS));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(router);
+app.get('/', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect('/auth/github');
+  }
+});
 
 app.use(express.static('public'));
+app.use(router);
+
 app.set('port', PORT);
 
 app.listen(app.get('port'), () => {
