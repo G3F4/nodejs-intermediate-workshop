@@ -23,7 +23,7 @@ const forbiddenMiddleware = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    res.send('Unauthorized. Please login.');
+    res.send('Unauthorized. Please refresh page to set new session.');
   }
 };
 
