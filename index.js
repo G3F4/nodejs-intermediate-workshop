@@ -1,15 +1,12 @@
+require('./db/connect');
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const api = require('./db/api.js');
+const api = require('./db/api');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-const mongoose = require('mongoose');
 
-const DB_HOST = process.env.DB === 'remote'
-  ? 'mongodb://mo1563_calendar:Test!23@85.194.240.29:27017/mo1563_calendar'
-  : 'mongodb://localhost/calendar';
 const PORT = process.env.PORT || 5000;
 const SESSION_OPTIONS = {
   secret: 'tajny szyfr enigmy',
@@ -18,15 +15,6 @@ const SESSION_OPTIONS = {
 };
 
 const app = express();
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log(`Connected to db | Host: ${DB_HOST}`);
-});
-
-mongoose.connect(DB_HOST, { useNewUrlParser: true });
-mongoose.set('debug', true);
 
 passport.serializeUser(function(user, cb) {
   cb(null, user);
