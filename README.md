@@ -101,7 +101,9 @@ Example app for purpose of WarsawJS workshop #31
 ###### `response:status`
 
 ```
-204 || no content
+{
+  id: string
+}
 ```
 
 
