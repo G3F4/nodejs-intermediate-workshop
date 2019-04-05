@@ -31,3 +31,10 @@ https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
 Aplikacja kliencka wysyła obiekt rejestracji subskrycji za każdym razem gdy zainstaluje albo zauktualizuje service worker.
 Aby wywołać w prosty sposób instalację SW najlepiej zatrzymać aktywny SW i przeładować stronę.
 Za każdym razem gdy serwer otrzyma subskrycję powinień wysłać powiadomienie powitalne i zapisać subskrycję w bazie.
+
+## Etap 5 - cykliczne wysyłanie powiadomień
+
+Na koniec zadbamy aby do każdego wydarzenia w kalendarzu, które ma aktywne powiadomienie, zostało wysłane powiadomienie.
+Zadbać należy aby powiadomienia były jednorazowe - jedno per wydarzenia.
+Do stworzenia joba wykorzystamy `agenda`, którą należy dodać do zależności.
+Następnie musimy uruchomić środowisko oraz zdefiniować job do wykonania oraz określić jego cykl.

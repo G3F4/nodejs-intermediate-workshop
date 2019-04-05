@@ -1,5 +1,6 @@
 const moment = require('moment-timezone');
 const EventModel = require('./models/EventModel');
+const SubscriptionModel = require('./models/SubscriptionModel');
 const UserModel = require('./models/UserModel');
 
 module.exports.getMonth = async (userId, date) => {
@@ -111,5 +112,18 @@ module.exports.getOrCreateUser = (userId, cb) => {
     });
   } catch (e) {
     throw new Error(`api:error | getOrCreateUser | ${e}`);
+  }
+};
+
+module.exports.addSubscription = async (userId, data) => {
+  try {
+    console.info(['db.api.addSubscription'], userId, data);
+    const doc = new SubscriptionModel({ userId, data });
+
+    await doc.save();
+
+    return doc._id;
+  } catch (e) {
+    throw new Error(`api:error | addSubscription | ${e}`);
   }
 };

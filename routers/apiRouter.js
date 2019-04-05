@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const webPush = require('web-push');
 const api = require('../db/api');
 
 const router = Router();
@@ -43,7 +44,42 @@ router.delete('/api/event/:id', async function (req, res) {
 });
 
 router.post('/api/notifications', async function (req, res) {
-  res.status(201);
+  try {
+    const payload = JSON.stringify({
+      title: 'Notifications enabled!',
+      notification: {
+        icon: 'https://avatars2.githubusercontent.com/u/25178950?s=200&v=4',
+        body: 'Notifications are great!',
+      },
+    });
+
+    await webPush.sendNotification(req.body.data, payload);
+    await api.addSubscription(req.user.userId, req.body.data);
+
+    res.status(201);
+    res.send();
+  } catch (e) {
+    res.status(403);
+    res.send(`
+      webPush.sendNotification error |
+      name | ${e.name}
+      message | ${e.message}
+      statusCode | ${e.statusCode}
+      headers | ${JSON.stringify(e.headers)}
+      body | ${e.body}
+      endpoint | ${e.endpoint}
+    `);
+
+    throw new Error(`
+      webPush.sendNotification error |
+      name | ${e.name}
+      message | ${e.message}
+      statusCode | ${e.statusCode}
+      headers | ${JSON.stringify(e.headers)}
+      body | ${e.body}
+      endpoint | ${e.endpoint}
+    `);
+  }
 });
 
 module.exports = router;

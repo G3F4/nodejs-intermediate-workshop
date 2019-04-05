@@ -14,7 +14,8 @@
     "mongoose": "^5.4.22",
     "morgan": "1.9.1",
     "passport": "0.4.0",
-    "passport-github": "1.1.0"
+    "passport-github": "1.1.0",
+    "web-push": "^3.3.3"
   },
   "scripts": {
     "client:build": "rm -rf public && tar -zxvf client-package.tar.gz && mv build public",
