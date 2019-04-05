@@ -15,3 +15,10 @@ Potrzebne będą zależności `passport` oraz `passport-github`.
 Rozwiązanie jjest oparte na sesji więc należy dodać do `express` obsługę sesji.
 Wykorzystamy do tego zależność `express-session`.
 
+## Etap 3 - baza danych
+
+Do przechowywania danych użyjemy `MongoDB`. Jako sterownik posłuży nam `mongoose`.
+Do pracy będziemy potrzebować 2 modeli i schem - `UserModel` oraz `EventModel`.
+Wszystkie operacje na kolekcjach będziemy wykonywać przez moduł proxy `api`. 
+Dzięki temu warstwa bazy danych zostanie wyraźnie odcięta od domeny serwera.
+Następnie wykorzystamy nowe `api` do integracji z `apiRouter`.
