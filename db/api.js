@@ -42,7 +42,7 @@ module.exports.getEventsWithinNextMinuteWithActiveNotification = async () => {
 module.exports.getDayEvents = async (userId, date) => {
   try {
     const $gte = moment(date).startOf('day').toDate();
-    const $lte = moment(date).endOf(1, 'day').toDate();
+    const $lte = moment(date).endOf('day').toDate();
 
     const events = await EventModel.find({
       time: { $gte, $lte },
