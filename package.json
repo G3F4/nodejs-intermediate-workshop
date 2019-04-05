@@ -7,17 +7,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "agenda": "2.0.2",
-    "body-parser": "1.18.3",
-    "chance": "1.0.18",
     "express": "4.16.4",
-    "express-session": "1.15.6",
-    "moment-timezone": "0.5.23",
-    "mongoose": "5.4.21",
-    "morgan": "1.9.1",
-    "passport": "0.4.0",
-    "passport-github": "1.1.0",
-    "web-push": "3.3.3"
+    "morgan": "1.9.1"
   },
   "scripts": {
     "client:build": "rm -rf public && tar -zxvf client-package.tar.gz && mv build public",
