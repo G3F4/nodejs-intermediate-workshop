@@ -4,7 +4,7 @@ Example app for purpose of WarsawJS workshop #31
 
 ## `API`
 
-#### `GET:api/calendar?month={YYYY-MM}`
+#### `GET: /api/calendar?month={YYYY-MM}`
 ##### Fetches calendar month
 ###### `response`
 
@@ -22,7 +22,7 @@ Example app for purpose of WarsawJS workshop #31
 }
 ```
 
-#### `GET:api/day?date={YYYY-MM-DD}`
+#### `GET: /api/day?date={YYYY-MM-DD}`
 ##### Fetches calendar day
 ###### `response`
 
@@ -41,7 +41,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `POST:api/event`
+#### `POST: /api/event`
 ##### Creates event
 ###### `body`
 
@@ -64,7 +64,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `PUT:api/event?id={guid}`
+#### `PUT: /api/event/:id`
 ##### Updates event
 ###### `body`
 
@@ -87,7 +87,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `DELETE:api/event?id={guid}`
+#### `DELETE: /api/event/:id`
 ##### Deletes reminder
 ###### `body`
 
@@ -105,7 +105,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `POST:api/subscriptions`
+#### `POST: /api/subscriptions`
 ##### Register user subscription
 ###### `body`
 
