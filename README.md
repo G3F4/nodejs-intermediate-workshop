@@ -1,4 +1,4 @@
-## Etap 0 - początek pracy - routing
+## Etap 1 - początek pracy - routing
 
 Serwer w tym stanie serwuje pliki statyczne z folderu `public`.
 Po uruchomieniu serwera, aplikację można zobaczyć w przeglądarce pod adresem `localhost:5000`.
@@ -7,3 +7,11 @@ Na podstawie kontraktu API, opisanego w pliku README na branchu master, dodać n
 Na razie nie mamy danych, więc będziemy zwracać zamockowane dane w postaci odpowiadającej projektowi `api`.
 Wszystkie endpointy warto zgrupować przy pomocy wspólnego routera.
 Po prawidłowym dodaniu endpointów, nie powinniśmy widzieć błędów w konsoli Network w przeglądarce.
+
+## Etap 2 - logowanie
+
+Do logowania wykorzystamy `OAuth` ze strategią `GitHub`.
+Potrzebne będą zależności `passport` oraz `passport-github`.
+Rozwiązanie jjest oparte na sesji więc należy dodać do `express` obsługę sesji.
+Wykorzystamy do tego zależność `express-session`.
+
