@@ -22,3 +22,12 @@ Do pracy będziemy potrzebować 2 modeli i schem - `UserModel` oraz `EventModel`
 Wszystkie operacje na kolekcjach będziemy wykonywać przez moduł proxy `api`. 
 Dzięki temu warstwa bazy danych zostanie wyraźnie odcięta od domeny serwera.
 Następnie wykorzystamy nowe `api` do integracji z `apiRouter`.
+
+## Etap 4 - powiadomienia - obsługa rejestracji subskrycji
+
+Teraz dodamy do aplikacji obsługę powiadomień przy wykorzystaniu `web-push` - zależność należy dodać do projektu.
+Do prawidłowego funkcjonowania wymagane jest wygenerowanie poprawnych kluczy VAPID.
+https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
+Aplikacja kliencka wysyła obiekt rejestracji subskrycji za każdym razem gdy zainstaluje albo zauktualizuje service worker.
+Aby wywołać w prosty sposób instalację SW najlepiej zatrzymać aktywny SW i przeładować stronę.
+Za każdym razem gdy serwer otrzyma subskrycję powinień wysłać powiadomienie powitalne i zapisać subskrycję w bazie.

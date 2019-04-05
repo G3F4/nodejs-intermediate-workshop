@@ -4,8 +4,10 @@ const SESSION_OPTIONS = {
   resave: false,
   saveUninitialized: true,
 };
+const DB_HOST = 'mongodb://localhost/calendar';
 
 module.exports = {
   PORT,
   SESSION_OPTIONS,
+  DB_HOST,
 };
