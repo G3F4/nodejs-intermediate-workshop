@@ -4,7 +4,7 @@ Example app for purpose of WarsawJS workshop #31
 
 ## `API`
 
-#### `GET: /`api`/calendar?month={YYYY-MM}`
+#### `GET: /api/calendar?month={YYYY-MM}`
 ##### Fetches calendar month
 ###### `response`
 
@@ -22,7 +22,7 @@ Example app for purpose of WarsawJS workshop #31
 }
 ```
 
-#### `GET: /`api`/day?date={YYYY-MM-DD}`
+#### `GET: /api/day?date={YYYY-MM-DD}`
 ##### Fetches calendar day
 ###### `response`
 
@@ -41,7 +41,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `POST: /`api`/event`
+#### `POST: /api/event`
 ##### Creates event
 ###### `body`
 
@@ -64,7 +64,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `PUT: /`api`/event/:id`
+#### `PUT: /api/event/:id`
 ##### Updates event
 ###### `body`
 
@@ -87,7 +87,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `DELETE: /`api`/event/:id`
+#### `DELETE: /api/event/:id`
 ##### Deletes reminder
 ###### `body`
 
@@ -107,7 +107,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 
-#### `POST: /`api`/subscriptions`
+#### `POST: /api/subscriptions`
 ##### Register user subscription
 ###### `body`
 
@@ -137,7 +137,7 @@ Serwer w tym stanie serwuje pliki statyczne z folderu `public`.
 Po uruchomieniu serwera, aplikację można zobaczyć w przeglądarce pod adresem `localhost:5000`.
 Pierwszym zadaniem, będzie dodanie routingu do serwera.
 Na podstawie kontraktu API, opisanego w pliku README na branchu master, dodać należy wszystkie endpointy wykorzystywane przez klienta.
-Na razie nie mamy danych, więc będziemy zwracać zamockowane dane w postaci odpowiadającej projektowi `api`.
+Na razie nie mamy danych, więc będziemy zwracać zamockowane dane w postaci odpowiadającej projektowi api.
 Wszystkie endpointy warto zgrupować przy pomocy wspólnego routera.
 Po prawidłowym dodaniu endpointów, nie powinniśmy widzieć błędów w konsoli Network w przeglądarce.
 
@@ -149,8 +149,8 @@ Kroki:
   * zdefiniować DB_HOST
   * skorzystać w połączeniu do bazy danych przez `proccess.env.DB_HOST` - można dodać do pliku z konfiguracją
 * stworzyć nowy plik na router główny aplikacji, wewnątrz utworzyć nowy router i wyekportować do użycia przez serwer
-* stworzyć nowy plik na router `api`, wewnątrz utwrzoyć nowy router i wyekportować do użycia że przez router główny
-* w pliku z routerem `api`, zdefiniować wymagane do pracy klienta endpointy zwracające zamockowane dane
+* stworzyć nowy plik na router api, wewnątrz utwrzoyć nowy router i wyekportować do użycia że przez router główny
+* w pliku z routerem api, zdefiniować wymagane do pracy klienta endpointy zwracające zamockowane dane
 
 [Rozwiązanie tego etapu](https://github.com/G3F4/warsawjs-workshop-31-calendar/compare/workshop...etap-1)
 
@@ -179,7 +179,7 @@ Kroki:
   * `/logout` - wylogowanie użytkownika i redirect na logowanie
   * `/auth/github` - wykorzystuje middleware `passport` z `github`
   * `/auth/github/callback` - wykorzystuje middleware `passport` z `github` z konfiguracją `failureRedirect` oraz `successRedirect`
-* dodanie do routera `api` middleware czy użytkownik jest zalogowany
+* dodanie do routera api middleware czy użytkownik jest zalogowany
 
 [Rozwiązanie tego etapu](https://github.com/G3F4/warsawjs-workshop-31-calendar/compare/etap-1...etap-2)
 
@@ -187,9 +187,9 @@ Kroki:
 
 Do przechowywania danych użyjemy `MongoDB`. Jako sterownik posłuży nam `mongoose`.
 Do pracy będziemy potrzebować 2 modeli i schem - `UserModel` oraz `EventModel`.
-Wszystkie operacje na kolekcjach będziemy wykonywać przez moduł proxy `api`. 
+Wszystkie operacje na kolekcjach będziemy wykonywać przez moduł proxy api. 
 Dzięki temu warstwa bazy danych zostanie wyraźnie odcięta od domeny serwera.
-Następnie wykorzystamy nowe `api` do integracji z `apiRouter`.
+Następnie wykorzystamy nowe api do integracji z `apiRouter`.
 
 Kroki
 
@@ -199,9 +199,10 @@ Kroki
 * stworzenie pliku na UserModel oraz definicja schemy i modelu mongoose
   * identyfikator użytkownika powinień być unikalnym indexem
 * stworzenie pliku na EventModel oraz definicja schemy i modelu mongoose
-* stworzenie pliku na `api` i zdefiniowanie metod wymaganych do integracji z routerem `api`
+* stworzenie pliku na api i zdefiniowanie metod wymaganych do integracji z routerem api
   * getOrCreateUser - jako argumenty przyjmuje id użytkownika oraz callback
     * zwraca wywołanie callback z błędem oraz obiekt `{ userId }`
+    * wykorzystać w strategii `oauth` podczas logowania - zamiast zwracać `profile.id` bezpośrednio wykorzystamy UserModel
   * getMonth - jako argumenty przyjmuje id użytkownika i datę w formacie 'YYYY-MM' zwraca:
     * zwracamy 6 tygodni, zaczynając od początku tygodnia 1 dnia miesiąca 
     ```
@@ -244,7 +245,7 @@ Kroki
   * deleteEvent - jako argumenty przyjmuje id wydarzenia
     * zwraca id wydarzenia
     
-* użycie metod `api` w routerze
+* użycie metod api w routerze
 
 [Rozwiązanie tego etapu](https://github.com/G3F4/warsawjs-workshop-31-calendar/compare/etap-2...etap-3)
 
@@ -265,7 +266,7 @@ Kroki:
   * wykorzystanie metody `setVapidDetails` do inicjalizacji
   * dodanie importu pliku do `index.js`
 * Dodanie SubscriptionModel, model zawiera pola na id użytwnika i dane subskrycji
-* Dodanie do `api` metodę dodającą nową subskrycję użytkownika
+* Dodanie do api metodę dodającą nową subskrycję użytkownika
   * argumentami tej metody są id użytwnika i dane subskrycji
   * metoda zwraca `_id` dokumnetu
 * dodać do endpointu `/api/notifications` 
@@ -282,10 +283,10 @@ Do stworzenia joba wykorzystamy `agenda`, którą należy dodać do zależności
 Następnie musimy uruchomić środowisko oraz zdefiniować job do wykonania oraz określić jego cykl.
 
 Kroki
-* dodać do `api` metodę `deleteSubscription`
+* dodać do api metodę `deleteSubscription`
   * argument - id subskrycji
   * zwrotka - id subskrycji
-* dodać do `api` metodę pobierającą wydzarzenia, które wymagają powiadomienia w danym momencie.
+* dodać do api metodę pobierającą wydzarzenia, które wymagają powiadomienia w danym momencie.
 * dodać do zależności `agenda`
 * stworzyć nowy plik na kod związany z `agenda`, dodać import do `index.js`
 * zdefiniować timezone dla `moment-timezone`
