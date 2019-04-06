@@ -5,143 +5,6 @@ Example app for purpose of WarsawJS workshop #31
 ## `API`
 
 #### `GET: /`api`/calendar?month={YYYY-MM}`
-##### Calendar JSON schema
-###### response schema
-
-```
-{
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/root.json",
-  "type": "object",
-  "title": "The Root Schema",
-  "required": [
-    "data"
-  ],
-  "properties": {
-    "data": {
-      "$id": "#/properties/data",
-      "type": "array",
-      "title": "The Data Schema",
-      "items": {
-        "$id": "#/properties/data/items",
-        "type": "object",
-        "title": "The Items Schema",
-        "required": [
-          "date",
-          "events"
-        ],
-        "properties": {
-          "date": {
-            "$id": "#/properties/data/items/properties/date",
-            "type": "string",
-            "title": "The Date Schema",
-            "default": "",
-            "examples": [
-              "2019-04-01"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "events": {
-            "$id": "#/properties/data/items/properties/events",
-            "type": "array",
-            "title": "The Events Schema"
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-#### `GET: /`api`/day?date={YYYY-MM-DD}`
-##### Day JSON schema
-###### `response`
-
-```
-{
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://example.com/root.json",
-  "type": "object",
-  "title": "The Root Schema",
-  "required": [
-    "data"
-  ],
-  "properties": {
-    "data": {
-      "$id": "#/properties/data",
-      "type": "array",
-      "title": "The Data Schema",
-      "items": {
-        "$id": "#/properties/data/items",
-        "type": "object",
-        "title": "The Items Schema",
-        "required": [
-          "id",
-          "description",
-          "time",
-          "title",
-          "notification"
-        ],
-        "properties": {
-          "id": {
-            "$id": "#/properties/data/items/properties/id",
-            "type": "string",
-            "title": "The Id Schema",
-            "default": "",
-            "examples": [
-              "5ca867948d0d701a9dfc6cff"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "description": {
-            "$id": "#/properties/data/items/properties/description",
-            "type": "string",
-            "title": "The Description Schema",
-            "default": "",
-            "examples": [
-              "asdasd"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "time": {
-            "$id": "#/properties/data/items/properties/time",
-            "type": "string",
-            "title": "The Time Schema",
-            "default": "",
-            "examples": [
-              "2019-04-11T12:00"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "title": {
-            "$id": "#/properties/data/items/properties/title",
-            "type": "string",
-            "title": "The Title Schema",
-            "default": "",
-            "examples": [
-              "asdasd"
-            ],
-            "pattern": "^(.*)$"
-          },
-          "notification": {
-            "$id": "#/properties/data/items/properties/notification",
-            "type": "boolean",
-            "title": "The Notification Schema",
-            "default": false,
-            "examples": [
-              false
-            ]
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-#### `GET: /`api`/calendar?month={YYYY-MM}`
 ##### Fetches calendar month
 ###### `response`
 
@@ -170,7 +33,7 @@ Example app for purpose of WarsawJS workshop #31
       id: string(format=guid)
       title: string
       description: string
-      time: string(format=YYYY-MM-DDThh:mm)
+      time: string(format=YYYY-MM-DDTHH:mm)
       notification: boolean
     }
   ]
@@ -186,7 +49,7 @@ Example app for purpose of WarsawJS workshop #31
 {
   title: string
   description: string
-  time: string(format=YYYY-MM-DDThh:mm)
+  time: string(format=YYYY-MM-DDTHH:mm)
   notification: boolean
 }
 
@@ -209,7 +72,7 @@ Example app for purpose of WarsawJS workshop #31
 {
   title: string
   description: string
-  time: string(format=YYYY-MM-DDThh:mm)
+  time: string(format=YYYY-MM-DDTHH:mm)
   notification: boolean
 }
 
@@ -359,7 +222,7 @@ Kroki
            id: string(format=guid)
            title: string
            description: string
-           time: string(format=YYYY-MM-DDThh:mm)
+           time: string(format=YYYY-MM-DDTHH:mm)
            notification: boolean
          }
        ]
@@ -367,7 +230,7 @@ Kroki
     * ```
          title: string
          description: string
-         time: string(format=YYYY-MM-DDThh:mm)
+         time: string(format=YYYY-MM-DDTHH:mm)
          notification: boolean
     zwraca id wydarzenia
    
@@ -375,7 +238,7 @@ Kroki
      * ```
          title: string
          description: string
-         time: string(format=YYYY-MM-DDThh:mm)
+         time: string(format=YYYY-MM-DDTHH:mm)
          notification: boolean
     zwraca id wydarzenia
   * deleteEvent - jako argumenty przyjmuje id wydarzenia

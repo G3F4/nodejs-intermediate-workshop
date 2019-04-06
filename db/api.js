@@ -36,7 +36,7 @@ module.exports.getDayEvents = async (userId, date) => {
     return events.map(doc => ({
       id: doc._id,
       description: doc.description,
-      time: moment(doc.time).format('YYYY-MM-DDThh:mm'),
+      time: moment(doc.time).format('YYYY-MM-DDTHH:mm'),
       title: doc.title,
       notification: doc.notification,
     }));
