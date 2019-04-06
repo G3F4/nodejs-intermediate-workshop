@@ -33,7 +33,7 @@ Example app for purpose of WarsawJS workshop #31
       id: string(format=guid)
       title: string
       description: string
-      time: string(format=YYYY-MM-DDThh:mm)
+      time: string(format=YYYY-MM-DDTHH:mm)
       notification: boolean
     }
   ]
@@ -49,7 +49,7 @@ Example app for purpose of WarsawJS workshop #31
 {
   title: string
   description: string
-  time: string(format=YYYY-MM-DDThh:mm)
+  time: string(format=YYYY-MM-DDTHH:mm)
   notification: boolean
 }
 
@@ -72,7 +72,7 @@ Example app for purpose of WarsawJS workshop #31
 {
   title: string
   description: string
-  time: string(format=YYYY-MM-DDThh:mm)
+  time: string(format=YYYY-MM-DDTHH:mm)
   notification: boolean
 }
 
@@ -218,7 +218,7 @@ Kroki
            id: string(format=guid)
            title: string
            description: string
-           time: string(format=YYYY-MM-DDThh:mm)
+           time: string(format=YYYY-MM-DDTHH:mm)
            notification: boolean
          }
        ]
@@ -226,7 +226,7 @@ Kroki
     * ```
          title: string
          description: string
-         time: string(format=YYYY-MM-DDThh:mm)
+         time: string(format=YYYY-MM-DDTHH:mm)
          notification: boolean
     zwraca id wydarzenia
    
@@ -234,7 +234,7 @@ Kroki
      * ```
          title: string
          description: string
-         time: string(format=YYYY-MM-DDThh:mm)
+         time: string(format=YYYY-MM-DDTHH:mm)
          notification: boolean
     zwraca id wydarzenia
   * deleteEvent - jako argumenty przyjmuje id wydarzenia
