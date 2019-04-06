@@ -1,7 +1,7 @@
 const Agenda = require('agenda');
 const moment = require('moment-timezone');
 const webPush = require('web-push');
-const { DB_HOST } = require('./constans');
+const { DB_HOST } = require('./constants');
 const api = require('./db/api');
 
 moment.tz.setDefault('Europe/Warsaw');
