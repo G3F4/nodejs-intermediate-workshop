@@ -10,6 +10,7 @@
     "agenda": "2.0.2",
     "body-parser": "1.18.3",
     "chance": "1.0.18",
+    "cors": "^2.8.5",
     "express": "4.16.4",
     "express-session": "1.15.6",
     "moment-timezone": "0.5.23",
