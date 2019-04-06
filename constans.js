@@ -7,7 +7,7 @@ const SESSION_OPTIONS = {
 const DB_HOST = process.env.DB_HOST;
 
 module.exports = {
-  DB_HOST,
   PORT,
-  SESSION_OPTIONS
+  SESSION_OPTIONS,
+  DB_HOST,
 };

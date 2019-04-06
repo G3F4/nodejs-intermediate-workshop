@@ -24,21 +24,6 @@ module.exports.getMonth = async (userId, date) => {
   }
 };
 
-module.exports.getEventsWithinNextMinuteWithActiveNotification = async () => {
-  try {
-    const $gte = moment(Date.now()).startOf('day').toDate();
-    const $lte = moment(Date.now()).add(1, 'day').toDate();
-    const events = await EventModel.find({
-      time: { $gte, $lte },
-      notification: true,
-    });
-
-    return events.map(doc => doc.toJSON());
-  } catch (e) {
-    throw new Error(`api:error | getEventsWithinNextMinuteWithActiveNotification | ${e}`);
-  }
-};
-
 module.exports.getDayEvents = async (userId, date) => {
   try {
     const $gte = moment(date).startOf('day').toDate();
@@ -118,6 +103,18 @@ module.exports.getSubscriptions = async (userId) => {
   }
 };
 
+module.exports.getOrCreateUser = (userId, cb) => {
+  try {
+    console.info(['db.api.getOrCreateUser'], userId);
+    UserModel.findOneAndUpdate({ userId }, { $set: { userId }}, { upsert: true  }, function (err, user) {
+
+      return cb(err, { userId: user.userId });
+    });
+  } catch (e) {
+    throw new Error(`api:error | getOrCreateUser | ${e}`);
+  }
+};
+
 module.exports.addSubscription = async (userId, data) => {
   try {
     console.info(['db.api.addSubscription'], userId, data);
@@ -142,15 +139,17 @@ module.exports.deleteSubscription = async (subscriptionId) => {
   }
 };
 
-module.exports.getOrCreateUser = (userId, cb) => {
+module.exports.getEventsWithinNextMinuteWithActiveNotification = async () => {
   try {
-    console.info(['db.api.getOrCreateUser'], userId);
-    UserModel.findOneAndUpdate({ userId }, { $set: { userId }}, { upsert: true  }, function (err, user) {
-
-      return cb(err, { userId: user.userId });
+    const $gte = moment(Date.now()).startOf('day').toDate();
+    const $lte = moment(Date.now()).add(1, 'day').toDate();
+    const events = await EventModel.find({
+      time: { $gte, $lte },
+      notification: true,
     });
+
+    return events.map(doc => doc.toJSON());
   } catch (e) {
-    throw new Error(`api:error | getOrCreateUser | ${e}`);
+    throw new Error(`api:error | getEventsWithinNextMinuteWithActiveNotification | ${e}`);
   }
 };
-

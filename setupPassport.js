@@ -1,6 +1,5 @@
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
-const api = require('./db/api');
 
 passport.serializeUser(function(user, cb) {
   cb(null, user);
@@ -15,5 +14,7 @@ passport.use(new GitHubStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
   },
-  (accessToken, refreshToken, profile, cb) => api.getOrCreateUser(profile.id, cb),
+  (accessToken, refreshToken, profile, cb) => {
+    cb(null, { id: profile.id });
+  },
 ));
