@@ -4,9 +4,7 @@ const SESSION_OPTIONS = {
   resave: false,
   saveUninitialized: true,
 };
-const DB_HOST = process.env.DB === 'remote'
-  ? 'mongodb://mo1563_calendar:Test!23@85.194.240.29:27017/mo1563_calendar'
-  : 'mongodb://localhost/calendar';
+const DB_HOST = process.env.DB_HOST;
 
 module.exports = {
   DB_HOST,
