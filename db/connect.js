@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { DB_HOST } = require('../constans');
+const { DB_HOST } = require('../constants');
 
 const db = mongoose.connection;
 

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const passport = require('passport');
 const router = require('./router');
-const { PORT, SESSION_OPTIONS } = require('./constans');
+const { PORT, SESSION_OPTIONS } = require('./constants');
 
 const app = express();
 
