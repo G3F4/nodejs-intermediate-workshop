@@ -280,7 +280,11 @@ Po prawidłowym dodaniu endpointów, nie powinniśmy widzieć błędów w konsol
 
 Kroki:
 
-* dodać do zależności `body-parser` oraz dodać wykorzystanie do serwera `express`
+* dodać do zależności `body-parser`, `cors`, `dotenv` oraz dodać wykorzystanie do serwera `express`
+* użyć middleware `cors` w serwerze
+* dodać plik `.env` i dodać go do `.gitignore`
+  * zdefiniować DB_HOST
+  * skorzystać w połączeniu do bazy danych przez `proccess.env.DB_HOST` - można dodać do pliku z konfiguracją
 * stworzyć nowy plik na router główny aplikacji, wewnątrz utworzyć nowy router i wyekportować do użycia przez serwer
 * stworzyć nowy plik na router `api`, wewnątrz utwrzoyć nowy router i wyekportować do użycia że przez router główny
 * w pliku z routerem `api`, zdefiniować wymagane do pracy klienta endpointy zwracające zamockowane dane
