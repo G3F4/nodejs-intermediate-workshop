@@ -5,7 +5,7 @@ Example app for purpose of WarsawJS workshop #31
 ## `API`
 
 #### `GET: /api/calendar?month={YYYY-MM}`
-##### Fetches calendar month
+##### Calendar JSON schema
 ###### response schema
 
 ```
@@ -55,7 +55,7 @@ Example app for purpose of WarsawJS workshop #31
 ```
 
 #### `GET: /api/day?date={YYYY-MM-DD}`
-##### Fetches calendar day
+##### Day JSON schema
 ###### `response`
 
 ```
@@ -138,6 +138,42 @@ Example app for purpose of WarsawJS workshop #31
       }
     }
   }
+}
+```
+
+#### `GET: /api/calendar?month={YYYY-MM}`
+##### Fetches calendar month
+###### `response`
+
+```
+{
+  data: [
+    date: string(format=YYYY-MM-DD),
+    events: [
+      {
+        id: string(format=guid)
+        title: string
+      }
+    ]
+  ]
+}
+```
+
+#### `GET: /api/day?date={YYYY-MM-DD}`
+##### Fetches calendar day
+###### `response`
+
+```
+{
+  data: [
+    {
+      id: string(format=guid)
+      title: string
+      description: string
+      time: string(format=YYYY-MM-DDThh:mm)
+      notification: boolean
+    }
+  ]
 }
 ```
 
