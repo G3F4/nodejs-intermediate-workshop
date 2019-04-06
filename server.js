@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const { PORT } = require('./constans');
+const { PORT } = require('./constants');
 
 const app = express();
 
