@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./router');
-const { PORT } = require('./constans');
+const { PORT } = require('./constants');
 
 const app = express();
 
