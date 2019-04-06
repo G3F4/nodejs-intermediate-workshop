@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -6,6 +7,7 @@ const { PORT } = require('./constans');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('combined'));
 
